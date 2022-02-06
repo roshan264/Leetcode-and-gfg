@@ -11,15 +11,8 @@
  */
 class Solution {
 public:
-    bool between(int strt , int end , int i)
-    {
-        if(i < strt || i > end)
-        {
-            return false;
-        }
-        
-        return true;
-    }
+     int indexPost[31];
+    
     TreeNode* constructTree(vector<int> preorder , vector<int> postorder , int startPre , int endPre , int startPost , int endPost)
     {
       //  cout<<startPre<<" "<<endPre<<" "<<startPost<<" "<<endPost<<"\n";
@@ -45,21 +38,12 @@ public:
         int root = preorder[startPre + 1];
         
         TreeNode *l = NULL , *r = NULL;
-        for(int i = startPost ; i < endPost ; i++)
-        {
-            if(postorder[i] == root)
-            {
-                int len = (i - startPost);
-                
-                 if(between(startPre+1,endPre ,  startPre + 1 ) && between(startPre+1,endPre ,  startPre + len + 1))
-                l = constructTree(preorder , postorder , startPre + 1 , startPre + len + 1 , startPost , i);
-                
-                if(between(startPre+1,endPre , startPre + 2 + len) && between(startPost,endPost-1 , i + 1)  && between(startPost,endPost -1, endPost-1));
-                r = constructTree(preorder , postorder , startPre + 2 + len , endPre , i + 1 , endPost-1);
-                break;
-            }
-        }
-        
+        int i = indexPost[root];
+        int len = (i - startPost);
+
+        l = constructTree(preorder , postorder , startPre + 1 , startPre + len + 1 , startPost , i);                
+        r = constructTree(preorder , postorder , startPre + 2 + len , endPre , i + 1 , endPost-1);
+
         TreeNode* head = new TreeNode(preorder[startPre]);
         head->left = l;
         head->right = r;
@@ -71,6 +55,13 @@ public:
         
         int n = preorder.size();
         
+       
+        
+        memset(indexPost , -1 , sizeof(indexPost));
+        for(int i = 0 ; i < postorder.size() ; i++)
+        {
+            indexPost[postorder[i]] = i;
+        }
         return constructTree(preorder , postorder , 0 , n - 1 , 0 , n - 1);
     }
 };
