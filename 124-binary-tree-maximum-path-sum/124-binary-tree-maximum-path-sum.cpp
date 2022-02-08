@@ -12,36 +12,27 @@
 class Solution {
 public:
     
-  //  int ans;
-   
-   /* int max(int a , int b)
-    {
-        if(a > b)
-        {
-            return a;
-        }
-        
-        return b;
-    }*/
-    int findPath(TreeNode* p , int *ans)
+    int ans;
+    
+    int findPath(TreeNode* p)
     {
         if(p == NULL)
         {
             return 0;
         }
         
-        int l = findPath(p->left , ans);
-        int r = findPath(p->right , ans);
+        int l = findPath(p->left);
+        int r = findPath(p->right);
         
-        *ans = max(*ans , l + r + p->val);
+        ans = max(ans , l + r + p->val);
         
         return max(0 , max(l , r) + p->val);
     }
     int maxPathSum(TreeNode* root) {
         
-        int ans = INT_MIN;
+        ans = INT_MIN;
         
-        int x = findPath(root , &ans);
+        int x = findPath(root);
         return ans;
     }
 };
