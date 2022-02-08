@@ -14,7 +14,7 @@ public:
     
   //  int ans;
    
-    int max(int a , int b)
+   /* int max(int a , int b)
     {
         if(a > b)
         {
@@ -22,7 +22,7 @@ public:
         }
         
         return b;
-    }
+    }*/
     int findPath(TreeNode* p , int *ans)
     {
         if(p == NULL)
