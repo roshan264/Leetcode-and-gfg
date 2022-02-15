@@ -49,13 +49,12 @@ public:
                    
                 }
                 p = p->next[ind];
+            }            
+            else
+            {
+              //  cout<<s<<" "<<i<<" "<<j<<" "<<ans<<" *\n";
+                return ans;
             }
-            
-             else
-                {
-                  //  cout<<s<<" "<<i<<" "<<j<<" "<<ans<<" *\n";
-                    return ans;
-                }
         }
         //cout<<ans<<"\n";
         return ans;
